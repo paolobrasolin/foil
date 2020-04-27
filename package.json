@@ -1,0 +1,24 @@
+{
+  "name": "foil",
+  "version": "0.1.0",
+  "description": "Wraps and peels PDF annotations",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paolobrasolin/foil.git"
+  },
+  "keywords": [
+    "PDF"
+  ],
+  "author": "Paolo Brasolin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paolobrasolin/foil/issues"
+  },
+  "homepage": "https://github.com/paolobrasolin/foil",
+  "dependencies": {
+    "@pdftron/pdfnet-node": "^7.1.1-1",
+    "yargs": "^15.3.1"
+  },
+  "devDependencies": {}
+}
