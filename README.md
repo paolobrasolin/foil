@@ -27,6 +27,8 @@ That's exactly what `foils` makes trivial.
 
 ## Setup
 
+### Using host machine
+
 1. Install [Node.js](https://nodejs.org/)
 2. Clone this repo
    ```
@@ -35,6 +37,25 @@ That's exactly what `foils` makes trivial.
 3. Install dependencies
    ```
    npm install
+   ```
+4. Run `foil`
+   ```
+   node index.js
+   ```
+
+### Using Docker
+
+1. Clone this repo
+   ```
+   git clone git@github.com:paolobrasolin/foil.git
+   ```
+2. Build Docker image
+   ```
+   docker build -t foil .
+   ```
+3. Run `foil`
+   ```
+   docker run foil
    ```
 
 ## Usage
