@@ -36,21 +36,28 @@ const argv = yargs
 
 adjustLevel(argv.verbose - argv.quiet)
 
-try {
-  const masterPath = path.resolve(argv.master)
-  const command = argv._[0]
-  if (!fs.existsSync(masterPath)) {
-    logger.error(`Master file not found at ${masterPath}`)
-    process.exit(1)
+const resolveMasterPath = (masterPath) => {
+  logger.debug(`Received master path ${masterPath}`)
+  const resolvedMasterPath = path.resolve(masterPath)
+  logger.debug(`Resolved master path to ${resolvedMasterPath}`)
+  if (fs.existsSync(resolvedMasterPath)) {
+    logger.info(`Master file found at ${resolvedMasterPath}`)
   } else {
-    logger.info(`Master file found at ${masterPath}`)
+    logger.error(`Master file not found at ${resolvedMasterPath}`)
+    process.exit(1)
   }
+  return resolvedMasterPath
+}
+
+try {
+  const resolvedMasterPath = resolveMasterPath(argv.master)
+  const command = argv._[0]
   switch (command) {
     case "peel":
-      XFDF.peel(masterPath)
+      XFDF.peel(resolvedMasterPath)
       break;
     case "wrap":
-      XFDF.wrap(masterPath)
+      XFDF.wrap(resolvedMasterPath)
       break;
   }
 } catch (err) {
