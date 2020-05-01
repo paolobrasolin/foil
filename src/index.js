@@ -6,7 +6,7 @@ const yargs = require("yargs");
 
 const XFDF = require("./xfdf");
 
-const logger = require('./logger');
+const { logger, adjustLevel } = require('./logger');
 
 //=[ CLI options parsing ]======================================================
 
@@ -24,6 +24,8 @@ const argv = yargs
       type: "string",
     });
   })
+  .count('verbose').alias('v', 'verbose').describe('v', 'increase logging level')
+  .count('quiet').alias('q', 'quiet').describe('q', 'decrease logging level')
   .example("$0 peel book.pdf", "Extract annotations from `book.ann.pdf` and save them to `book.xfdf`")
   .example("$0 wrap book.pdf", "Apply annotations in `book.xfdf` to `book.pdf` and save to `book.ann.pdf`")
   .demandCommand(1)
@@ -31,6 +33,8 @@ const argv = yargs
   .argv;
 
 //=[ Main ]=====================================================================
+
+adjustLevel(argv.verbose - argv.quiet)
 
 try {
   const masterPath = path.resolve(argv.master)
