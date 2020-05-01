@@ -6,6 +6,7 @@ WORKDIR /foil
 COPY package*.json ./
 RUN npm install
 COPY . .
+WORKDIR /data
 # NOTE: to get a shell prompt, use `docker run -it --entrypoint sh foil`
-ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "node", "/foil/src/index.js" ]
 CMD [ "--help" ]

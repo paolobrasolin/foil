@@ -55,7 +55,7 @@ That's exactly what `foils` makes trivial.
    ```
 3. Run `foil`
    ```
-   docker run foil
+   docker run -v $(pwd):/data foil
    ```
 
 ## Usage
