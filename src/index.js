@@ -6,7 +6,7 @@ const yargs = require("yargs");
 
 const XFDF = require("./xfdf");
 
-const logger = console;
+const logger = require('./logger');
 
 //=[ CLI options parsing ]======================================================
 
@@ -36,8 +36,10 @@ try {
   const masterPath = path.resolve(argv.master)
   const command = argv._[0]
   if (!fs.existsSync(masterPath)) {
-    logger.error("Master file not found:", masterPath)
+    logger.error(`Master file not found at ${masterPath}`)
     process.exit(1)
+  } else {
+    logger.info(`Master file found at ${masterPath}`)
   }
   switch (command) {
     case "peel":
