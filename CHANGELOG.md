@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `Dockerfile` for containerized execution.
+- Support for [`xournalpp`](https://github.com/xournalpp/xournalpp)'s `XOPP` annotations
+- Logging and log levels with cli flags to control them.
+
+### Changed
+- `XML` based format are prettified on peeling.
 
 ## [0.1.0] - 2020-04-28
 ### Added
