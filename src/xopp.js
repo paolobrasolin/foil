@@ -2,8 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const zlib = require("zlib");
 
+const prettifier = require('./prettifier');
 const { logger } = require('./logger');
-
 const LOG_LABEL = '[XOPP]'
 
 //==============================================================================
@@ -27,10 +27,10 @@ const unsafePeel = async (workfilePath, annotationsPath) => {
   const xopp = fs.readFileSync(workfilePath);
 
   logger.debug(`${LOG_LABEL} Extracting XOPP annotations...`)
-  const xml = zlib.gunzipSync(xopp)
+  const xml = zlib.gunzipSync(xopp).toString()
 
   logger.debug(`${LOG_LABEL} Writing XML to ${annotationsPath}`)
-  await fs.promises.writeFile(annotationsPath, xml);
+  await fs.promises.writeFile(annotationsPath, prettifier.xml(xml));
 };
 
 const unsafeWrap = async (workfilePath, annotationsPath) => {

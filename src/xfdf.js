@@ -3,8 +3,8 @@ const path = require("path");
 
 const { PDFNet } = require("@pdftron/pdfnet-node");
 
+const prettifier = require('./prettifier');
 const { logger } = require('./logger');
-
 const LOG_LABEL = '[XFDF]'
 
 //==============================================================================
@@ -34,7 +34,7 @@ const unsafePeel = async (workfilePath, annotationsPath) => {
   const xfdf = await fdf.saveAsXFDFAsString();
 
   logger.debug(`${LOG_LABEL} Writing XFDF to ${annotationsPath}`)
-  await fs.promises.writeFile(annotationsPath, xfdf);
+  await fs.promises.writeFile(annotationsPath, prettifier.xml(xfdf));
 };
 
 const unsafeWrap = async (masterPath, workfilePath, annotationsPath) => {
