@@ -5,7 +5,7 @@ const { PDFNet } = require("@pdftron/pdfnet-node");
 
 const { logger } = require('./logger');
 
-LOG_LABEL = '[XFDF]'
+const LOG_LABEL = '[XFDF]'
 
 //==============================================================================
 

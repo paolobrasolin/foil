@@ -5,6 +5,7 @@ const path = require("path");
 const yargs = require("yargs");
 
 const XFDF = require("./xfdf");
+const XOPP = require("./xopp");
 
 const { logger, adjustLevel } = require('./logger');
 
@@ -55,9 +56,11 @@ try {
   switch (command) {
     case "peel":
       XFDF.peel(resolvedMasterPath)
+      XOPP.peel(resolvedMasterPath)
       break;
     case "wrap":
       XFDF.wrap(resolvedMasterPath)
+      XOPP.wrap(resolvedMasterPath)
       break;
   }
 } catch (err) {
