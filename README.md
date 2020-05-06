@@ -58,9 +58,9 @@ That's exactly what `foils` makes trivial.
    docker run -v $(pwd):/data foil
    ```
 
-You might find useful setting a bash alias:
+You might find useful setting a bash alias (note the single quotes!):
 ```bash
-alias foil="docker run -v $(pwd):/data foil"
+alias foil='docker run -v $(pwd):/data foil'
 ```
 
 ## Usage
