@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const path = require("path");
+// const path = require("path");
 const yargs = require("yargs");
 
 const XFDF = require("./xfdf");
@@ -37,30 +37,23 @@ const argv = yargs
 
 adjustLevel(argv.verbose - argv.quiet)
 
-const resolveMasterPath = (masterPath) => {
-  logger.debug(`Received master path ${masterPath}`)
-  const resolvedMasterPath = path.resolve(masterPath)
-  logger.debug(`Resolved master path to ${resolvedMasterPath}`)
-  if (fs.existsSync(resolvedMasterPath)) {
-    logger.info(`Master file found at ${resolvedMasterPath}`)
-  } else {
-    logger.error(`Master file not found at ${resolvedMasterPath}`)
-    process.exit(1)
-  }
-  return resolvedMasterPath
+const ensureMasterExists = (masterPath) => {
+  if (!fs.existsSync(masterPath))
+    throw Error(`Master file not found at ${masterPath}`)
+  logger.info(`Master file found at ${masterPath}`)
 }
 
 try {
-  const resolvedMasterPath = resolveMasterPath(argv.master)
+  ensureMasterExists(argv.master)
   const command = argv._[0]
   switch (command) {
     case "peel":
-      XFDF.peel(resolvedMasterPath)
-      XOPP.peel(resolvedMasterPath)
+      XFDF.peel(argv.master)
+      XOPP.peel(argv.master)
       break;
     case "wrap":
-      XFDF.wrap(resolvedMasterPath)
-      XOPP.wrap(resolvedMasterPath)
+      XFDF.wrap(argv.master)
+      XOPP.wrap(argv.master)
       break;
   }
 } catch (err) {
